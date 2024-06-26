@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Biblioteca Pessoal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #6200ea;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            margin: 20px;
+        }
+        .section {
+            background-color: #fff;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #6200ea;
+        }
+        .book-form input, .book-form textarea, .book-form select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .book-form button {
+            background-color: #6200ea;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .book-form button:hover {
+            background-color: #3700b3;
+        }
+        .book-list {
+            list-style: none;
+            padding: 0;
+        }
+        .book-item {
+            background-color: #f9f9f9;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Minha Biblioteca Pessoal</h1>
+    </header>
+    <main>
+        <section class="section">
+            <h2>Livros Físicos</h2>
+            <form class="book-form" id="physical-books-form">
+                <input type="text" id="physical-book-title" placeholder="Título do Livro" required>
+                <input type="text" id="physical-book-author" placeholder="Autor do Livro" required>
+                <button type="submit">Adicionar Livro</button>
+            </form>
+            <ul class="book-list" id="physical-books-list"></ul>
+        </section>
+
+        <section class="section">
+            <h2>Livros Lidos</h2>
+            <form class="book-form" id="read-books-form">
+                <input type="text" id="read-book-title" placeholder="Título do Livro" required>
+                <input type="text" id="read-book-author" placeholder="Autor do Livro" required>
+                <input type="date" id="read-book-start-date" placeholder="Data de Início" required>
+                <input type="date" id="read-book-end-date" placeholder="Data de Fim" required>
+                <label for="read-book-rating">Avaliação:</label>
+                <select id="read-book-rating" required>
+                    <option value="1">1 Estrela</option>
+                    <option value="2">2 Estrelas</option>
+                    <option value="3">3 Estrelas</option>
+                    <option value="4">4 Estrelas</option>
+                    <option value="5">5 Estrelas</option>
+                </select>
+                <textarea id="read-book-opinion" rows="4" placeholder="Opinião"></textarea>
+                <button type="submit">Adicionar Livro Lido</button>
+            </form>
+            <ul class="book-list" id="read-books-list"></ul>
+        </section>
+    </main>
+    <script>
+        document.getElementById('physical-books-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let title = document.getElementById('physical-book-title').value;
+            let author = document.getElementById('physical-book-author').value;
+            let listItem = document.createElement('li');
+            listItem.className = 'book-item';
+            listItem.textContent = `${title} por ${author}`;
+            document.getElementById('physical-books-list').appendChild(listItem);
+            document.getElementById('physical-books-form').reset();
+        });
+
+        document.getElementById('read-books-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let title = document.getElementById('read-book-title').value;
+            let author = document.getElementById('read-book-author').value;
+            let startDate = document.getElementById('read-book-start-date').value;
+            let endDate = document.getElementById('read-book-end-date').value;
+            let rating = document.getElementById('read-book-rating').value;
+            let opinion = document.getElementById('read-book-opinion').value;
+            let listItem = document.createElement('li');
+            listItem.className = 'book-item';
+            listItem.innerHTML = `<strong>${title}</strong> por ${author}<br>Início: ${startDate} - Fim: ${endDate}<br>Avaliação: ${rating} Estrelas<br>Opinião: ${opinion}`;
+            document.getElementById('read-books-list').appendChild(listItem);
+            document.getElementById('read-books-form').reset();
+        });
+    </script>
+</body>
+</html>
